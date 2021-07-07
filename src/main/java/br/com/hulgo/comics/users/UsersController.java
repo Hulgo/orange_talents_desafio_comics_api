@@ -1,21 +1,21 @@
 package br.com.hulgo.comics.users;
 
 import br.com.hulgo.comics.exceptions.UsersNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UsersController {
 
+    @Autowired
     private UsersRepository repository;
-
-    public UsersController(UsersRepository repository) {
-        this.repository = repository;
-    }
 
     @GetMapping
     List<Users> all(){
@@ -33,9 +33,9 @@ public class UsersController {
 
         try {
             repository.save(usersRequest.toUsers());
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body("Cadastro Efetivado!");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body("Cadastro não efetivado! - " + e.getMessage() );
         }
 
     }

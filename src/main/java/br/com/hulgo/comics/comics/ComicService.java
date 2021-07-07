@@ -23,12 +23,6 @@ public class ComicService {
         this.client = client;
     }
 
-    public Comic getAll() {
-        Long timestamp = new Date().getTime();
-
-        return client.getAll(timestamp, PUBLIC_KEY, buildHash((timestamp)));
-    }
-
     private String buildHash(Long timeStamp) {
         String string = timeStamp + PRIVATE_KEY + PUBLIC_KEY;
         InputStream inputStream = new ByteArrayInputStream(string.getBytes(Charset.forName("UTF-8")));
@@ -55,14 +49,18 @@ public class ComicService {
         }
         comic.getData().getResults().forEach(item -> item.getPrices().forEach(pop -> pop.setDiscountDay(discountDay(lastDigit))));
         comic.getData().getResults().forEach(item -> item.getPrices().forEach(pop -> pop.setDiscountActive(discountActive(lastDigit))));
-
         if(discountActive(lastDigit)){
             comic.getData().getResults().forEach(item -> item.getPrices().forEach(pop -> pop.setPrice(pop.getPrice() * 0.9)));
         } else {
             comic.getData().getResults().forEach(item -> item.getPrices().forEach(pop -> pop.setPrice(pop.getPrice())));
         }
-
         return comic;
+    }
+
+    public Comic getAll() {
+        Long timestamp = new Date().getTime();
+
+        return client.getAll(timestamp, PUBLIC_KEY, buildHash((timestamp)));
     }
 
     private String discountDay(String lastDigit) {

@@ -50,22 +50,6 @@ public class UsersRequest {
         return dataNasc;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setDataNasc(Date dataNasc) {
-        this.dataNasc = dataNasc;
-    }
-
     public Users toUsers(){
         return new Users(this.name, this.email, this.cpf, this.dataNasc);
     }

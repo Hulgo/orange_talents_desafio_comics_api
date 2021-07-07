@@ -4,6 +4,7 @@ import br.com.hulgo.comics.comics.Comic;
 import br.com.hulgo.comics.comics.ComicService;
 import br.com.hulgo.comics.users.Users;
 import br.com.hulgo.comics.users.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,15 +21,14 @@ import java.util.Optional;
 @RequestMapping("/usercomics")
 public class UserComicsController {
 
+    @Autowired
     private UserComicsRepository userComicsRepository;
-    private UsersRepository usersRepository;
-    private ComicService comicService;
 
-    public UserComicsController(UserComicsRepository userComicsRepository, UsersRepository usersRepository, ComicService comicService) {
-        this.userComicsRepository = userComicsRepository;
-        this.usersRepository = usersRepository;
-        this.comicService = comicService;
-    }
+    @Autowired
+    private UsersRepository usersRepository;
+
+    @Autowired
+    private ComicService comicService;
 
     @PostMapping
     public ResponseEntity<?> userComicSave(@RequestBody @Valid UserComicsRequest userComicsRequest) {

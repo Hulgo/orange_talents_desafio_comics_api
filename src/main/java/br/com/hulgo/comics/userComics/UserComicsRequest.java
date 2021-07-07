@@ -1,7 +1,6 @@
 package br.com.hulgo.comics.userComics;
 
 import br.com.hulgo.comics.users.Users;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.NotNull;
 

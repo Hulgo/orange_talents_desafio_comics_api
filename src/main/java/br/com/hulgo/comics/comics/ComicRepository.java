@@ -1,11 +1,13 @@
 package br.com.hulgo.comics.comics;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "comicRepository", url = "${url.marvel}/v1/public")
+@Repository
 public interface ComicRepository {
 
     @RequestMapping(method = RequestMethod.GET, value = "/comics")

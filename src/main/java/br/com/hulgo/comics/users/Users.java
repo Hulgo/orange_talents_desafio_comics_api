@@ -1,6 +1,7 @@
 package br.com.hulgo.comics.users;
 
 import br.com.hulgo.comics.userComics.UserComics;
+import br.com.hulgo.comics.validators.CPFValidator;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Users implements Serializable {
     private String email;
 
     @Column(nullable = false, unique = true)
+    @CPFValidator
     private String cpf;
 
     @Column(nullable = false)
